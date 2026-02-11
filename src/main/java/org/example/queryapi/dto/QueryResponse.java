@@ -15,6 +15,9 @@ public class QueryResponse {
             example = "The recommended topology is active-passive [1]. Each node runs the same version [2].")
     private String answer;
 
+    @Schema(description = "Whether an answer was successfully synthesized", example = "true")
+    private boolean answerSynthesized;
+
     @Schema(description = "List of cited source documents in order of first citation appearance")
     private List<CitedDocument> citedDocuments;
 
@@ -24,8 +27,9 @@ public class QueryResponse {
     public QueryResponse() {
     }
 
-    public QueryResponse(String answer, List<CitedDocument> citedDocuments, ResponseMetadata metadata) {
+    public QueryResponse(String answer, boolean answerSynthesized, List<CitedDocument> citedDocuments, ResponseMetadata metadata) {
         this.answer = answer;
+        this.answerSynthesized = answerSynthesized;
         this.citedDocuments = citedDocuments;
         this.metadata = metadata;
     }
@@ -36,6 +40,14 @@ public class QueryResponse {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public boolean isAnswerSynthesized() {
+        return answerSynthesized;
+    }
+
+    public void setAnswerSynthesized(boolean answerSynthesized) {
+        this.answerSynthesized = answerSynthesized;
     }
 
     public List<CitedDocument> getCitedDocuments() {

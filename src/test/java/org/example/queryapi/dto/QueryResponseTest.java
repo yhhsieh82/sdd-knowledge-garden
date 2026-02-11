@@ -12,18 +12,20 @@ class QueryResponseTest {
     void createsQueryResponseWithAllFields() {
         CitedDocument doc1 = new CitedDocument("doc-1", "Deployment Guide", "...", null);
         CitedDocument doc2 = new CitedDocument("doc-2", "Node Configuration", "...", null);
-        ResponseMetadata metadata = new ResponseMetadata(1250L, true, 5);
+        ResponseMetadata metadata = new ResponseMetadata(5, 2, 1250L);
 
         QueryResponse response = new QueryResponse(
                 "The recommended topology is active-passive [1]. Each node runs the same version [2].",
+                true,
                 List.of(doc1, doc2),
                 metadata
         );
 
         assertThat(response.getAnswer()).contains("active-passive");
+        assertThat(response.isAnswerSynthesized()).isTrue();
         assertThat(response.getCitedDocuments()).hasSize(2);
         assertThat(response.getMetadata().getProcessingTimeMs()).isEqualTo(1250L);
-        assertThat(response.getMetadata().isAnswerSynthesized()).isTrue();
-        assertThat(response.getMetadata().getChunksRetrieved()).isEqualTo(5);
+        assertThat(response.getMetadata().getTotalChunksRetrieved()).isEqualTo(5);
+        assertThat(response.getMetadata().getTotalDocumentsCited()).isEqualTo(2);
     }
 }

@@ -11,19 +11,19 @@ public class ResponseMetadata {
     @Schema(description = "Total processing time in milliseconds", example = "1250")
     private long processingTimeMs;
 
-    @Schema(description = "Whether an answer was successfully synthesized", example = "true")
-    private boolean answerSynthesized;
-
     @Schema(description = "Number of chunks retrieved from knowledge base", example = "5")
-    private int chunksRetrieved;
+    private int totalChunksRetrieved;
+
+    @Schema(description = "Number of unique documents cited in the answer", example = "3")
+    private int totalDocumentsCited;
 
     public ResponseMetadata() {
     }
 
-    public ResponseMetadata(long processingTimeMs, boolean answerSynthesized, int chunksRetrieved) {
+    public ResponseMetadata(int totalChunksRetrieved, int totalDocumentsCited, long processingTimeMs) {
+        this.totalChunksRetrieved = totalChunksRetrieved;
+        this.totalDocumentsCited = totalDocumentsCited;
         this.processingTimeMs = processingTimeMs;
-        this.answerSynthesized = answerSynthesized;
-        this.chunksRetrieved = chunksRetrieved;
     }
 
     public long getProcessingTimeMs() {
@@ -34,19 +34,19 @@ public class ResponseMetadata {
         this.processingTimeMs = processingTimeMs;
     }
 
-    public boolean isAnswerSynthesized() {
-        return answerSynthesized;
+    public int getTotalChunksRetrieved() {
+        return totalChunksRetrieved;
     }
 
-    public void setAnswerSynthesized(boolean answerSynthesized) {
-        this.answerSynthesized = answerSynthesized;
+    public void setTotalChunksRetrieved(int totalChunksRetrieved) {
+        this.totalChunksRetrieved = totalChunksRetrieved;
     }
 
-    public int getChunksRetrieved() {
-        return chunksRetrieved;
+    public int getTotalDocumentsCited() {
+        return totalDocumentsCited;
     }
 
-    public void setChunksRetrieved(int chunksRetrieved) {
-        this.chunksRetrieved = chunksRetrieved;
+    public void setTotalDocumentsCited(int totalDocumentsCited) {
+        this.totalDocumentsCited = totalDocumentsCited;
     }
 }
